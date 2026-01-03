@@ -18,70 +18,85 @@
 
         .card {
             background: #ffffff;
-            width: 420px;
+            width: 440px;
             padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0px 15px 30px rgba(0,0,0,0.2);
+            border-radius: 18px;
+            box-shadow: 0px 20px 40px rgba(0,0,0,0.25);
             text-align: center;
+            animation: fadeIn 0.6s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         h1 {
-            margin-bottom: 10px;
-            color: #333;
+            margin-bottom: 5px;
+            color: #222;
         }
 
-        p {
-            color: #666;
+        .subtitle {
+            color: #777;
             font-size: 14px;
-            margin-bottom: 20px;
+            margin-bottom: 22px;
+        }
+
+        .upload-box {
+            border: 2px dashed #c33764;
+            border-radius: 12px;
+            padding: 18px;
+            background: #fafafa;
+            cursor: pointer;
         }
 
         input[type="file"] {
             width: 100%;
-            padding: 10px;
-            border: 2px dashed #c33764;
-            border-radius: 10px;
-            cursor: pointer;
-            background: #fafafa;
         }
 
         button {
             margin-top: 20px;
             width: 100%;
-            padding: 12px;
+            padding: 13px;
             background: linear-gradient(135deg, #1d2671, #c33764);
             border: none;
-            border-radius: 10px;
+            border-radius: 12px;
             color: white;
             font-size: 16px;
             font-weight: bold;
             cursor: pointer;
-            transition: 0.3s;
+            transition: 0.3s ease;
         }
 
         button:hover {
-            transform: scale(1.03);
-            opacity: 0.95;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
 
         .result {
-            margin-top: 20px;
-            font-size: 20px;
+            margin-top: 22px;
+            font-size: 22px;
             font-weight: bold;
             color: #1d2671;
+        }
+
+        .confidence {
+            margin-top: 5px;
+            font-size: 14px;
+            color: #555;
         }
 
         img {
             margin-top: 15px;
             max-width: 100%;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            border-radius: 12px;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.25);
         }
 
         footer {
-            margin-top: 20px;
+            margin-top: 22px;
             font-size: 12px;
-            color: #999;
+            color: #aaa;
         }
     </style>
 </head>
@@ -89,10 +104,12 @@
 <body>
     <div class="card">
         <h1>🚗 Car vs Bike 🚲</h1>
-        <p>CNN Image Classification using Deep Learning</p>
+        <div class="subtitle">CNN Image Classification using Deep Learning</div>
 
         <form method="POST" enctype="multipart/form-data">
-            <input type="file" name="file" accept="image/*" required>
+            <div class="upload-box">
+                <input type="file" name="file" accept="image/*" required>
+            </div>
             <button type="submit">Predict Image</button>
         </form>
 
@@ -100,6 +117,13 @@
             <div class="result">
                 Prediction: {{ result }}
             </div>
+
+            {% if confidence %}
+                <div class="confidence">
+                    Confidence: {{ confidence }}
+                </div>
+            {% endif %}
+
             <img src="{{ image }}" alt="Uploaded Image">
         {% endif %}
 
