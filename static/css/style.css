@@ -1,0 +1,15 @@
+body {
+    background: linear-gradient(120deg,#1d2671,#c33764);
+    height: 100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family:Arial;
+}
+
+.card {
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    text-align:center;
+}
