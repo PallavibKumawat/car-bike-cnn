@@ -1,26 +1,111 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Car vs Bike CNN</title>
+    <meta charset="UTF-8">
+    <title>Car vs Bike Classifier</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1d2671, #c33764);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card {
+            background: #ffffff;
+            width: 420px;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 15px 30px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        p {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            border: 2px dashed #c33764;
+            border-radius: 10px;
+            cursor: pointer;
+            background: #fafafa;
+        }
+
+        button {
+            margin-top: 20px;
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #1d2671, #c33764);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.03);
+            opacity: 0.95;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #1d2671;
+        }
+
+        img {
+            margin-top: 15px;
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        footer {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #999;
+        }
+    </style>
 </head>
-<body style="background:#f2f2f2; text-align:center; padding-top:50px;">
 
-    <h2>Car vs Bike Classification</h2>
+<body>
+    <div class="card">
+        <h1>🚗 Car vs Bike 🚲</h1>
+        <p>CNN Image Classification using Deep Learning</p>
 
-    <form method="POST" enctype="multipart/form-data">
-        <input type="file" name="file" required>
-        <br><br>
-        <button type="submit">Predict</button>
-    </form>
+        <form method="POST" enctype="multipart/form-data">
+            <input type="file" name="file" accept="image/*" required>
+            <button type="submit">Predict Image</button>
+        </form>
 
-    {% if image %}
-        <br>
-        <img src="{{ image }}" width="250">
-    {% endif %}
+        {% if result %}
+            <div class="result">
+                Prediction: {{ result }}
+            </div>
+            <img src="{{ image }}" alt="Uploaded Image">
+        {% endif %}
 
-    {% if result %}
-        <h3>Prediction: {{ result }}</h3>
-    {% endif %}
-
+        <footer>
+            Built with CNN + Flask
+        </footer>
+    </div>
 </body>
 </html>
